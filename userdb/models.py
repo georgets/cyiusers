@@ -5,24 +5,23 @@ class User(models.Model):
     fname = models.CharField(max_length=50,verbose_name="First Name")
     lname = models.CharField(max_length=50,verbose_name="Last Name")
     project = models.ForeignKey("Project",verbose_name="Project")
-    linklings_id = models.CharField(max_length=50,verbose_name="Linklings ID")
 
     def __unicode__(self):
         return "%s, %s (%s)" % (self.lname,self.fname,self.username)
 
 class Project(models.Model):
-    name = models.CharField(max_length=50,verbose_name="Project ID")
-    title = models.CharField(max_length=50,verbose_name="Project Title") 
+    name = models.CharField(max_length=50,verbose_name="Project ID",null=False)
+    title = models.CharField(max_length=50,verbose_name="Project Title",null=True) 
     cpu_allocation = models.IntegerField(default=0,verbose_name="CPU Allocation")
-    
+    linklings_id = models.CharField(max_length=50,verbose_name="Linklings ID",null=True)
+    pi_email = models.EmailField(verbose_name="PI Email",null=True)
+    pi =  models.ForeignKey("User",verbose_name="PI",related_name="project_pi",null=True)
+
     def __unicode__(self):
         return self.name
 
-#	Project ID
-#	Title
 #	Scientific Field 
 #	PI
-#	PI email
 #	Institution/Company
 #	Country
 #	Access Type
