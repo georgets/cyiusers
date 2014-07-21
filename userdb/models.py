@@ -1,4 +1,5 @@
 from django.db import models
+import lists 
 
 class User(models.Model):
     username = models.CharField(max_length=50,verbose_name="username")
@@ -16,6 +17,7 @@ class Project(models.Model):
     linklings_id = models.CharField(max_length=50,verbose_name="Linklings ID",null=True)
     pi_email = models.EmailField(verbose_name="PI Email",null=True)
     pi =  models.ForeignKey("User",verbose_name="PI",related_name="project_pi",null=True)
+    scientific_field = models.CharField(max_length=50,verbose_name="Project ID",null=True,choices=SCIENTIFIC_FIELDS)
 
     def __unicode__(self):
         return self.name
